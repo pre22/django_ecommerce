@@ -19,9 +19,9 @@ from ecommerce.views import home_view, about_view, contact_view, login_page, reg
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view, name="home"),
-    path('about/', about_view, name="about"),
-    path('contact/', contact_view, name="contact"),
-    path('login/', login_page, name="login"),
-    path('register/', register_page, name="register"),
+    path('', home_view, name='home'),
+    path('about/', about_view, name='about'),
+    path('contact/', contact_view, name='contact'),
+    path('login/', login_page, name='login'),
+    path('register/', register_page, name='register'),
 ]
