@@ -1,4 +1,7 @@
 from django import forms
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 class ContactForm(forms.Form):
     """
@@ -45,6 +48,15 @@ class RegisterForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(label="Confirm Password",widget=forms.PasswordInput)
 
+    # Checks if email address exist 
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        qs = User.object.filter(email=email)
+        if qs.exists():
+            raise forms.ValidationError("Email already exist!, Please input another email address")
+        return email
+
+    # Checks if password is correct 
     def clean(self):
         data = self.cleaned_data
         password = self.cleaned_data.get("password")
